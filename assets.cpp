@@ -1,5 +1,4 @@
 #include "assets.h"
-
 #include "raylib.h"
 
 void load_fonts()
@@ -35,11 +34,24 @@ void load_sounds()
     InitAudioDevice();
     win_sound = LoadSound("data/sounds/win.wav");
     lose_sound = LoadSound("data/sounds/lose.wav");
+
+
+    if (FileExists("data/music/09.mp3")) {
+        background_music = LoadMusicStream("data/music/09.mp3");
+        PlayMusicStream(background_music);
+        SetMusicVolume(background_music, 0.5f);
+        is_music_loaded = true;
+    }
 }
 
 void unload_sounds()
 {
     UnloadSound(win_sound);
     UnloadSound(lose_sound);
+
+    if (is_music_loaded) {
+        UnloadMusicStream(background_music);
+    }
+
     CloseAudioDevice();
 }

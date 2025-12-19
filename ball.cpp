@@ -2,9 +2,8 @@
 #include "assets.h"
 #include "level.h"
 #include "paddle.h"
-
+#include "game.h"
 #include "raylib.h"
-
 #include <cmath>
 #include <numbers>
 

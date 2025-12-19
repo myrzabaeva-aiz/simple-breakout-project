@@ -2,7 +2,6 @@
 #define SPRITE_H
 
 #include "raylib.h"
-
 #include <string>
 
 struct sprite {
@@ -18,4 +17,4 @@ struct sprite {
 sprite load_sprite(const std::string& file_name_prefix, const std::string& file_name_suffix, size_t frame_count = 1, bool loop = true, size_t frames_to_skip = 3);
 void unload_sprite(sprite& sprite);
 
-#endif // SPRITE_H
+#endif

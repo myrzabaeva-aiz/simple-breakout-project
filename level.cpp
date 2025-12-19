@@ -1,10 +1,8 @@
 #include "level.h"
-
 #include "ball.h"
 #include "game.h"
 #include "graphics.h"
 #include "paddle.h"
-
 #include "raylib.h"
 
 char* current_level_data;
@@ -18,7 +16,6 @@ void load_level(const int offset)
         ClearBackground(BLACK);
         init_victory_menu();
         current_level_index = 0;
-
         return;
     }
 

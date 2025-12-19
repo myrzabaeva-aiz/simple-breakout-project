@@ -1,5 +1,4 @@
 #include "sprite.h"
-
 #include <cassert>
 
 sprite load_sprite(

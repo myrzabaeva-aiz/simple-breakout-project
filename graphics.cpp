@@ -1,12 +1,10 @@
 #include "graphics.h"
-
 #include "assets.h"
 #include "ball.h"
 #include "level.h"
 #include "paddle.h"
-
+#include "game.h"
 #include "raylib.h"
-
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -139,7 +137,7 @@ void draw_ui()
     draw_text(level_counter);
 
     const Text boxes_remaining = {
-        "BLOCKS " + std::to_string(current_level_blocks),
+        "LIVES " + std::to_string(lives),
         { 0.5f, 0.9625f },
         48.0f,
         WHITE,
@@ -257,4 +255,29 @@ void draw_victory_menu()
         &menu_font
     };
     draw_text(victory_subtitle);
+}
+
+void draw_game_over_menu()
+{
+    ClearBackground(BLACK);
+
+    const Text go_title = {
+        "GAME OVER",
+        { 0.50f, 0.50f },
+        100.0f,
+        RED,
+        4.0f,
+        &menu_font
+    };
+    draw_text(go_title);
+
+    const Text go_subtitle = {
+        "Press Enter to Restart",
+        { 0.50f, 0.65f },
+        32.0f,
+        WHITE,
+        4.0f,
+        &menu_font
+    };
+    draw_text(go_subtitle);
 }

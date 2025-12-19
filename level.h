@@ -2,9 +2,7 @@
 #define LEVEL_H
 
 #include "game.h"
-
 #include "raylib.h"
-
 #include <cstddef>
 
 inline level current_level;
@@ -22,4 +20,4 @@ void set_level_cell(size_t row, size_t column, char cell);
 bool is_colliding_with_level_cell(Vector2 pos, Vector2 size, char cell = '#');
 char& get_colliding_level_cell(Vector2 pos, Vector2 size, char look_for);
 
-#endif // LEVEL_H
+#endif

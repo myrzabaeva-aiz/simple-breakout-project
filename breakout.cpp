@@ -9,8 +9,6 @@
 
 void update()
 {
-    // TODO
-
     if (IsKeyPressed(KEY_ESCAPE)) {
         game_state = paused_state;
     }
@@ -21,9 +19,16 @@ void update()
         move_paddle(paddle_speed);
     }
     move_ball();
+
     if (!is_ball_inside_level()) {
-        load_level();
+        lives--;
         PlaySound(lose_sound);
+
+        if (lives <= 0) {
+            game_state = game_over_state;
+        } else {
+            load_level(0);
+        }
     } else if (current_level_blocks == 0) {
         load_level(1);
         PlaySound(win_sound);
@@ -32,8 +37,6 @@ void update()
 
 void draw()
 {
-    // TODO
-
     draw_level();
     draw_paddle();
     draw_ball();
@@ -48,14 +51,58 @@ int main()
 
     load_fonts();
     load_textures();
-    load_level();
     load_sounds();
 
+    lives = 3;
+    load_level();
+
     while (!WindowShouldClose()) {
+
+        if (is_music_loaded) {
+            UpdateMusicStream(background_music);
+        }
+
         BeginDrawing();
 
-        draw();
-        update();
+        switch (game_state) {
+        case menu_state:
+            draw_menu();
+            if (IsKeyPressed(KEY_ENTER)) {
+                lives = 3;
+                load_level(0);
+                game_state = in_game_state;
+            }
+            break;
+        case in_game_state:
+            draw();
+            update();
+            break;
+        case paused_state:
+            draw();
+            draw_pause_menu();
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                game_state = in_game_state;
+            }
+            break;
+        case victory_state:
+            draw_victory_menu();
+            if (IsKeyPressed(KEY_ENTER)) {
+                lives = 3;
+                current_level_index = 0;
+                load_level(0);
+                game_state = menu_state;
+            }
+            break;
+        case game_over_state:
+            draw_game_over_menu();
+            if (IsKeyPressed(KEY_ENTER)) {
+                lives = 3;
+                current_level_index = 0;
+                load_level(0);
+                game_state = menu_state;
+            }
+            break;
+        }
 
         EndDrawing();
     }

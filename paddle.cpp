@@ -1,8 +1,7 @@
 #include "paddle.h"
 #include "level.h"
-
 #include "raylib.h"
-
+#include "game.h"
 #include <cmath>
 
 void spawn_paddle()
