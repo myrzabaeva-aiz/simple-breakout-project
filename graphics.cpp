@@ -101,13 +101,14 @@ void derive_graphics_metrics()
 
 void draw_menu()
 {
-    ClearBackground(BLACK);
+
+    ClearBackground(Color{255, 182, 193, 255});
 
     const Text game_title = {
         "Breakout",
         { 0.50f, 0.50f },
         200.0f,
-        RED,
+        WHITE,
         4.0f,
         &menu_font
     };
@@ -117,7 +118,7 @@ void draw_menu()
         "Press Enter to Start",
         { 0.50f, 0.65f },
         32.0f,
-        WHITE,
+        BLACK,
         4.0f,
         &menu_font
     };
@@ -130,26 +131,26 @@ void draw_ui()
         "LEVEL " + std::to_string(current_level_index + 1) + " OUT OF " + std::to_string(level_count),
         { 0.5f, 0.0375f },
         48.0f,
-        WHITE,
+        BLACK,
         4.0f,
         &menu_font
     };
     draw_text(level_counter);
 
-    const Text boxes_remaining = {
+    const Text lives_counter = {
         "LIVES " + std::to_string(lives),
         { 0.5f, 0.9625f },
         48.0f,
-        WHITE,
+        BLACK,
         4.0f,
         &menu_font
     };
-    draw_text(boxes_remaining);
+    draw_text(lives_counter);
 }
 
 void draw_level()
 {
-    ClearBackground(BLACK);
+    ClearBackground(Color{255, 182, 193, 255});
 
     for (size_t row = 0; row < current_level.rows; ++row) {
         for (size_t column = 0; column < current_level.columns; ++column) {
@@ -186,13 +187,13 @@ void draw_ball()
 
 void draw_pause_menu()
 {
-    ClearBackground(BLACK);
+    DrawRectangle(0, 0, screen_size.x, screen_size.y, {255, 255, 255, 100});
 
     const Text paused_title = {
         "Press Escape to Resume",
         { 0.50f, 0.50f },
         32.0f,
-        WHITE,
+        BLACK,
         4.0f,
         &menu_font
     };
@@ -230,7 +231,8 @@ void draw_victory_menu()
 {
     animate_victory_menu();
 
-    DrawRectangleV({ 0.0f, 0.0f }, { screen_size.x, screen_size.y }, { 0, 0, 0, 50 });
+    ClearBackground(Color{255, 182, 193, 255});
+
 
     for (const auto& [x, y] : victory_balls_pos) {
         DrawCircleV({ x, y }, victory_balls_size, WHITE);
@@ -240,7 +242,7 @@ void draw_victory_menu()
         "Victory!",
         { 0.50f, 0.50f },
         100.0f,
-        RED,
+        WHITE,
         4.0f,
         &menu_font
     };
@@ -250,7 +252,7 @@ void draw_victory_menu()
         "Press Enter to Restart",
         { 0.50f, 0.65f },
         32.0f,
-        WHITE,
+        BLACK,
         4.0f,
         &menu_font
     };
@@ -259,13 +261,14 @@ void draw_victory_menu()
 
 void draw_game_over_menu()
 {
-    ClearBackground(BLACK);
+    // Розовый фон
+    ClearBackground(Color{255, 182, 193, 255});
 
     const Text go_title = {
         "GAME OVER",
         { 0.50f, 0.50f },
         100.0f,
-        RED,
+        WHITE,
         4.0f,
         &menu_font
     };
@@ -275,7 +278,7 @@ void draw_game_over_menu()
         "Press Enter to Restart",
         { 0.50f, 0.65f },
         32.0f,
-        WHITE,
+        BLACK, // <-- Черный текст
         4.0f,
         &menu_font
     };
